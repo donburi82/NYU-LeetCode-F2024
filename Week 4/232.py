@@ -1,0 +1,23 @@
+# 232. Implement Queue using Stacks
+class MyQueue:
+    def __init__(self):
+        self.s1 = []  # push
+        self.s2 = []  # pop
+
+    def push(self, x: int) -> None:
+        self.s1.append(x)
+
+    def pop(self) -> int:
+        if not self.s2:
+            while self.s1:
+                self.s2.append(self.s1.pop())
+        return self.s2.pop()
+
+    def peek(self) -> int:
+        if not self.s2:
+            while self.s1:
+                self.s2.append(self.s1.pop())
+        return self.s2[-1]
+
+    def empty(self) -> bool:
+        return max(len(self.s1), len(self.s2))==0
